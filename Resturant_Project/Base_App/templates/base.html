@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Pizzeria</title>
+
+  <!-- Bootstrap 5 (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Owl Carousel -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+
+  <!-- Nice Select -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+
+  <!-- Font Awesome -->
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet" />
+
+  <!-- Custom CSS -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+  <link href="{% static 'css/responsive.css' %}" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon">
+</head>
+
+<body {% block class %}{% endblock class %}>
+
+  <div class="hero_area">
+    <div class="bg-box">
+      <img src="{% static 'images/hero-bg.jpg' %}" alt="">
+    </div>
+
+    <!-- header section starts -->
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="{% url 'Home' %}">
+            <span>Burgger</span>
+          </a>
+
+          <!-- Navbar toggler (Bootstrap 5 syntax) -->
+           {% if user.is_authenticated %}
+              <span class="username">{{ user.username }}</span>
+              <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            {% else %}
+              <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+            {% endif %}
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item {% block home_status %}{% endblock home_status %}">
+                <a class="nav-link" href="{% url 'Home' %}">Home</a>
+              </li>
+              <li class="nav-item {% block menu_status %}{% endblock menu_status %}">
+                <a class="nav-link" href="{% url 'Menu' %}">Menu</a>
+              </li>
+              <li class="nav-item {% block about_status %}{% endblock about_status %}">
+                <a class="nav-link" href="{% url 'About' %}">About</a>
+              </li>
+              <li class="nav-item {% block table_status %}{% endblock table_status %}">
+                <a class="nav-link" href="{% url 'Book_Table' %}">Book Table</a>
+              </li>
+              
+              <li class="nav-item {% block feedback_status %}{% endblock feedback_status %}">
+                <a class="nav-link" href="{% url 'Feedback_Form' %}">Feedback</a>
+              </li>
+              
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <!-- end header section -->
+
+    {% block slider %}{% endblock slider %}
+  </div>
+
+  {% block main %}{% endblock main %}
+
+  <!-- footer section -->
+  <footer class="footer_section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 footer-col">
+          <div class="footer_contact">
+            <h4>Contact Us</h4>
+            <div class="contact_link_box">
+              <a href=""><i class="fa fa-map-marker"></i> <span>Location</span></a>
+              <a href=""><i class="fa fa-phone"></i> <span>Call +01 1234567890</span></a>
+              <a href=""><i class="fa fa-envelope"></i> <span>demo@gmail.com</span></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <div class="footer_detail">
+            <a href="" class="footer-logo">Feane</a>
+            <p>Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words.</p>
+            <div class="footer_social">
+              <a href=""><i class="fa fa-facebook"></i></a>
+              <a href=""><i class="fa fa-twitter"></i></a>
+              <a href=""><i class="fa fa-linkedin"></i></a>
+              <a href=""><i class="fa fa-instagram"></i></a>
+              <a href=""><i class="fa fa-pinterest"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 footer-col">
+          <h4>Opening Hours</h4>
+          <p>Everyday</p>
+          <p>10.00 AM - 10.00 PM</p>
+        </div>
+      </div>
+      <div class="footer-info">
+        <p>
+          &copy; <span id="displayYear"></span> All Rights Reserved By
+          <a href="https://html.design/">Free Html Templates</a><br><br>
+          Distributed By <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+  <!-- end footer section -->
+
+  <!-- JS Files -->
+  <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>
